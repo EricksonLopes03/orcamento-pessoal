@@ -55,37 +55,42 @@
       </div>
       <div class="row mt-5">
         <div class="col-md-2  pb-3">
-          <select class="form-control">
+          <select class="form-control" id="ano">
             <option value="">Ano</option>
             <option value="2020">2020</option>
           </select>
         </div>
 
         <div class="col-md-2  pb-3">
-          <select class="form-control">
+          <select class="form-control" id="mes">
             <option value="">Mês</option>
-            <option value="">Janeiro</option>
-            <option value="">Fevereiro</option>
-            <option value="">Março</option>
-            <option value="">Abril</option>
-            <option value="">Maio</option>
-            <option value="">Junho</option>
-            <option value="">Julho</option>
-            <option value="">Agosto</option>
-            <option value="">Setembro</option>
-            <option value="">Outubro</option>
-            <option value="">Novembro</option>
-            <option value="">Dezembro</option>
+            <option value="1">Janeiro</option>
+            <option value="2">Fevereiro</option>
+            <option value="3">Março</option>
+            <option value="4">Abril</option>
+            <option value="5">Maio</option>
+            <option value="6">Junho</option>
+            <option value="7">Julho</option>
+            <option value="8">Agosto</option>
+            <option value="9">Setembro</option>
+            <option value="10">Outubro</option>
+            <option value="11">Novembro</option>
+            <option value="12">Dezembro</option>
           </select>
         </div>
 
         <div class="col-md-2  pb-3">
-          <input type="number" class="form-control" name="" id="" placeholder="Dia"/>
+          <input type="number" class="form-control" id="dia" placeholder="Dia"/>
         </div>
 
         <div class="col-md-6  pb-3">
-          <select class="form-control">
+          <select class="form-control" id="tipo">
             <option value="">Tipo</option>
+            <option value="1">Alimentação</option>
+            <option value="2">Educação</option>
+            <option value="3">Lazer</option>
+            <option value="4">Saúde</option>
+            <option value="5">Transporte</option>
           </select>
         </div>
       </div>
@@ -93,15 +98,15 @@
 
       <div class="row">
         <div class="col-md-8  pb-3">
-          <input type="text" class="form-control" name="" id="" placeholder="Descrição"/>
+          <input type="text" class="form-control" id="descricao" placeholder="Descrição"/>
         </div>
 
         <div class="col-md-2  pb-3">
-          <input type="text" class="form-control" name="" id="" placeholder="Valor"/>
+          <input type="text" class="form-control" id="valor" placeholder="Valor"/>
         </div>
 
         <div class="col-md-2 d-flex justify-content-end  pb-3">
-          <button class="btn btn-success"><i class="fas fa-plus-circle"></i>&nbsp;Adicionar</button>
+          <button class="btn btn-success" onclick="cadastrarDespesa()"><i class="fas fa-plus-circle"></i>&nbsp;Adicionar</button>
         </div>
 
       </div>
