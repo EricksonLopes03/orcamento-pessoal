@@ -1,0 +1,9 @@
+.navbar-light .navbar-nav .nav-link{
+    color: white;
+}
+
+.rodape{
+    height: 50px;
+    background-color: #007BFF;
+    color: white;
+}
