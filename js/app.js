@@ -58,9 +58,40 @@ class Despesa {
         this._valor = valor
     }
 
-    
+    validarDados(){
+        for (let i in this) {
+            if (this[i] == null || this[i] == undefined || this[i] == '') {
+                return false
+                
+            }
+        }
+        return true
+    }
 
 }
+
+class BD{
+    constructor(){
+        this._id = localStorage.getItem('id')
+
+    }
+
+    getProximoId(){
+        if(this._id === null){
+            return this._id = 0
+        }else{
+       
+            return ++this._id
+        }
+    }
+
+    gravar(despesa){
+        let id = this.getProximoId()       
+        localStorage.setItem(id, JSON.stringify(despesa))
+    }
+}
+
+let bd = new BD()
 
 function cadastrarDespesa(){
     let ano = document.getElementById('ano')
@@ -78,8 +109,12 @@ function cadastrarDespesa(){
         descricao.value,
         valor.value
     )
-
-
+    
+    if(despesa.validarDados()){       
+        $('#sucessoGravacao').modal('show')
+    }else{
+        $('#erroGravacao').modal('show')
+    }
+    
 
 }
-
