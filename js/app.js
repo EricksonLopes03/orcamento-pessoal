@@ -1,3 +1,4 @@
+
 class Despesa {
     constructor(ano, mes, dia, tipo, descricao, valor){
         this._ano = ano
@@ -74,20 +75,35 @@ class BD{
     constructor(){
         this._id = localStorage.getItem('id')
 
-    }
-
-    getProximoId(){
         if(this._id === null){
-            return this._id = 0
-        }else{
-       
-            return ++this._id
+            localStorage.setItem('id', 0) //salva id zero quando nao ainda nao ha nenhum objeto cadastrado
         }
+
     }
 
-    gravar(despesa){
-        let id = this.getProximoId()       
+    proximoId(){
+        let proximoId = localStorage.getItem('id')
+		return parseInt(proximoId) + 1 //necessario converter para int, pois o JSON recuperado é no formato string
+    }
+
+    gravar(despesa){    
+        let id = this.proximoId()  
         localStorage.setItem(id, JSON.stringify(despesa))
+        localStorage.setItem('id', id) //atualiza o id do ultimo objeto salvo
+    }
+
+    recuperarTodosRegistros(){
+        let despesas = Array()
+        let id = localStorage.getItem('id') //recupera id salvo
+        for(let i = 0; i <= id; i++){
+            let despesa = JSON.parse(localStorage.getItem(i))
+
+            if(despesa !== null){ //o contato e sequencial, este teste evita que seja cadastrado um valor null no array despesas
+                despesas.push(despesa)
+            }
+            
+        }
+        return despesas;
     }
 }
 
@@ -109,12 +125,56 @@ function cadastrarDespesa(){
         descricao.value,
         valor.value
     )
-    
-    if(despesa.validarDados()){       
-        $('#sucessoGravacao').modal('show')
+
+    let botao = document.getElementById('botaoMensagem')
+    let texto = document.getElementById('corpoMensagem')
+    let titulo = document.getElementById('exampleModalLabel')
+
+    if(despesa.validarDados()){
+        bd.gravar(despesa)       
+        dialogSucesso(botao, texto, titulo)
+        
     }else{
-        $('#erroGravacao').modal('show')
+        dialogErro(botao, texto, titulo)
+        
     }
     
+
+}
+
+function dialogSucesso(botao, texto, titulo){
+    botao.className = 'btn btn-success'
+    botao.innerHTML = 'Ok'
+
+    texto.innerHTML = 'A despesa foi salva com sucesso!'
+
+    titulo.innerHTML = 'Despesa salva'
+    titulo.className = 'text-success'  
+    $('#dialogGravacao').modal('show') //selecionando o modal do Bootstrap por jQuery
+}
+
+function dialogErro(botao, texto, titulo){
+    botao.className = 'btn btn-danger'
+    botao.innerHTML = 'Voltar e corrigir'
+
+    texto.innerHTML = 'Campos obrigatórios não foram preenchidos corretamente!'
+
+    titulo.innerHTML = 'Erro ao adicionar despesa'
+    titulo.className = 'text-danger'
+    $('#dialogGravacao').modal('show') //selecionando o modal do Bootstrap por jQuery
+}
+
+function carregaListaDespesa(){
+    let despesas = bd.recuperarTodosRegistros()
+    let tabelaDespesas = document.getElementById('tabelaDespesas')
+    
+    despesas.forEach(function(d){
+       let linhaTabela = tabelaDespesas.insertRow()   //criando linha para a tabela - - objeto tbody
+
+        linhaTabela.insertCell(0).innerHTML = `${d._dia}/${d._mes}/${d._ano}` //criando coluna para a tabela - objeto tbody
+        linhaTabela.insertCell(1).innerHTML = d._tipo
+        linhaTabela.insertCell(2).innerHTML = d._descricao
+        linhaTabela.insertCell(3).innerHTML = d._valor
+    })
 
 }
