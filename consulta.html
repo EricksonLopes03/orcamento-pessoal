@@ -55,14 +55,14 @@
       </div>
       <div class="row mt-5">
         <div class="col-md-2  pb-3">
-          <select class="form-control">
+          <select class="form-control" id="ano">
             <option value="">Ano</option>
             <option value="2020">2020</option>
           </select>
         </div>
 
         <div class="col-md-2  pb-3">
-          <select class="form-control">
+          <select class="form-control" id="mes">
             <option value="">Mês</option>
             <option value="">Janeiro</option>
             <option value="">Fevereiro</option>
@@ -80,12 +80,17 @@
         </div>
 
         <div class="col-md-2  pb-3">
-          <input type="number" class="form-control" name="" id="" placeholder="Dia"/>
+          <input type="number" class="form-control" name="" id="dia" placeholder="Dia"/>
         </div>
 
         <div class="col-md-6  pb-3">
-          <select class="form-control">
+          <select class="form-control" id="tipo">
             <option value="">Tipo</option>
+            <option value="1">Alimentação</option>
+            <option value="2">Educação</option>
+            <option value="3">Lazer</option>
+            <option value="4">Saúde</option>
+            <option value="5">Transporte</option>
           </select>
         </div>
       </div>
@@ -93,15 +98,15 @@
 
       <div class="row">
         <div class="col-md-8  pb-3">
-          <input type="text" class="form-control" name="" id="" placeholder="Descrição"/>
+          <input type="text" class="form-control" name="" id="descricao" placeholder="Descrição"/>
         </div>
 
         <div class="col-md-2  pb-3">
-          <input type="text" class="form-control" name="" id="" placeholder="Valor"/>
+          <input type="text" class="form-control" name="" id="valor" placeholder="Valor"/>
         </div>
 
         <div class="col-md-2 d-flex justify-content-end  pb-3">
-          <button class="btn btn-primary"><i class="fas fa-search"></i></i>&nbsp;Buscar</button>
+          <button class="btn btn-primary"  onclick="filtrarBusca()"><i class="fas fa-search"></i>&nbsp;Buscar</button>
         </div>
 
       </div>
@@ -117,6 +122,8 @@
           <th>Tipo</th>
           <th>Descrição</th>
           <th>Valor</th>
+          <th>Ação</th>
+          
         </tr>
       </thead>
       <tbody id="tabelaDespesas">
